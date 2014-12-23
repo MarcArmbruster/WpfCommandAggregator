@@ -119,19 +119,16 @@ namespace CommandAggregatorExample.CmdAgg
         /// <param name="key">The command key.</param>
         /// <returns>The command for the given key (Empty command if not found/exists).</returns>
         public ICommand GetCommand(string key)
-        {
-            lock (this.commands)
+        {           
+            if (this.commands.Any(k => k.Key == key))
             {
-                if (this.commands.Any(k => k.Key == key))
-                {
-                    return this.commands[key];
-                }
-                else
-                {
-                    // Empty command (to avoid null reference exceptions)
-                    return new RelayCommand(p1 => { });
-                }
+                return this.commands[key];
             }
+            else
+            {
+                // Empty command (to avoid null reference exceptions)
+                return new RelayCommand(p1 => { });
+            }           
         }
 
         /// <summary>

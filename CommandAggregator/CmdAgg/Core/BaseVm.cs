@@ -34,6 +34,7 @@ namespace CommandAggregatorExample
         /// </summary>
         protected BaseVm()
         {
+            this.InitCommands();
         }
 
         #endregion Constructor        
