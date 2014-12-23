@@ -4,7 +4,7 @@
     <Application.Resources>
 
         <!--  Marc's beautiful dock panel background  -->
-        <Style TargetType="DockPanel">
+        <Style TargetType="DockPanel" x:Key="dockPanelStyle">
             <Setter Property="Background">
                 <Setter.Value>
                     <RadialGradientBrush Center="0.2,0.2" RadiusX="1.5" RadiusY="0.9" GradientOrigin="0.3,0.3">

@@ -5,8 +5,8 @@
         Height="350" Width="525"
         WindowStartupLocation="CenterScreen">
         
-    <DockPanel>
-        <ToolBar DockPanel.Dock="Top" Background="LightBlue" BorderBrush="LightBlue" BorderThickness="1">
+    <DockPanel Style="{StaticResource dockPanelStyle}">
+        <ToolBar DockPanel.Dock="Top" Background="Transparent" BorderBrush="LightBlue" BorderThickness="1">
             <Button Content="Exit" Command="{Binding CmdAgg[Exit]}" Template="{StaticResource buttonTemplate}"/>
             <Button Content="Save" Command="{Binding CmdAgg[Save]}" Template="{StaticResource buttonTemplate}"/>
             <Button Content="Print" Command="{Binding CmdAgg[Print]}" Template="{StaticResource buttonTemplate}"/>
