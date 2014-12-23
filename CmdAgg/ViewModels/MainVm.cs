@@ -29,8 +29,7 @@ namespace CommandAggregatorExample.ViewModels
         /// Initializes a new instance of the <see cref="MainVm"/> class.
         /// </summary>
         public MainVm()
-        {
-            this.InitCommands();
+        {           
         }
 
         /// <summary>
