@@ -1,0 +1,23 @@
+﻿<Window x:Class="CommandAggregatorExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"        
+        Title="Command Aggregator Example" 
+        Height="350" Width="525"
+        WindowStartupLocation="CenterScreen">
+        
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top" Background="LightBlue" BorderBrush="LightBlue" BorderThickness="1">
+            <Button Content="Exit" Command="{Binding CmdAgg[Exit]}" Template="{StaticResource buttonTemplate}"/>
+            <Button Content="Save" Command="{Binding CmdAgg[Save]}" Template="{StaticResource buttonTemplate}"/>
+            <Button Content="Print" Command="{Binding CmdAgg[Print]}" Template="{StaticResource buttonTemplate}"/>
+            <Button Content="Options" Command="{Binding CmdAgg[Options]}" Template="{StaticResource buttonTemplate}"/>
+            <Button Content="About" Command="{Binding CmdAgg[About]}" Template="{StaticResource buttonTemplate}"/>
+            <Button Content="AboutAsnyc" Command="{Binding CmdAgg[AboutAsnyc]}" CommandParameter="async" Template="{StaticResource buttonTemplate}"/>
+        </ToolBar> 
+        
+        <TextBlock Text="Amazing window content :-)" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"/>
+        
+    </DockPanel>
+</Window>
