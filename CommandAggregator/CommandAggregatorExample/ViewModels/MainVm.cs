@@ -43,7 +43,7 @@ namespace CommandAggregatorExample.ViewModels
             this.CmdAgg.AddOrSetCommand("Save", new Action<object>(p1 => MessageBox.Show("Save called")), new Predicate<object>(p2 => true));
             this.CmdAgg.AddOrSetCommand("Print", new RelayCommand(p1 => MessageBox.Show("Print called"), p2 => true));
             this.CmdAgg.AddOrSetCommand("Options", new RelayCommand(p1 => MessageBox.Show("Options called"), p2 => true));
-            this.CmdAgg.AddOrSetCommand("About", new RelayCommand(p1 => MessageBox.Show("About " + (p1 == null ? string.Empty : "[" + p1 + "]") +" called"), p2 => true));
+            this.CmdAgg.AddOrSetCommand("About", new RelayCommand(p1 => MessageBox.Show("About" + (p1 == null ? string.Empty : " [" + p1 + "]") + " called"), p2 => true));
             this.CmdAgg.AddOrSetCommand("AboutAsnyc", new RelayCommand(p1 => OpenAboutAsync(p1), p2 => true));
         }
 
