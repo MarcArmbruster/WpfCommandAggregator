@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using WPFCommandAggregator;
 
 namespace CommandAggregatorExample.ViewModels
 {
