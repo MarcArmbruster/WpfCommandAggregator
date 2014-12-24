@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace CommandAggregatorExample
+namespace WPFCommandAggregator
 {
     /// <summary>
     /// Relay Command based on Josh Smith's implementation.

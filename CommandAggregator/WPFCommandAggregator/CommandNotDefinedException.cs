@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommandAggregatorExample.CmdAgg
+namespace WPFCommandAggregator
 {
     /// <summary>
     /// Command Aggregator exception.    

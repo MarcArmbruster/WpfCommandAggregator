@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CommandAggregatorExample.CmdAgg
+namespace WPFCommandAggregator
 {
     /// <summary>
     /// Command Aggregator class. 
@@ -156,15 +156,12 @@ namespace CommandAggregatorExample.CmdAgg
         /// </summary>
         /// <param name="key">The command key.</param>
         public void Remove(string key)
-        {
-            lock (this.commands)
+        {            
+            if (this.commands.Any(k => k.Key == key))
             {
-                if (this.commands.Any(k => k.Key == key))
-                {
-                    ICommand oldCommand;
-                    this.commands.TryRemove(key, out oldCommand);
-                }
-            }
+                ICommand oldCommand;
+                this.commands.TryRemove(key, out oldCommand);
+            }            
         }
 
         /// <summary>
@@ -174,11 +171,17 @@ namespace CommandAggregatorExample.CmdAgg
         {
             if (this.commands != null)
             {
-                lock (this.commands)
-                {
-                    this.commands.Clear();
-                }
+                this.commands.Clear();
             }
+        }
+
+        /// <summary>
+        /// Counts the registered commands.
+        /// </summary>
+        /// <returns>Number of registered commands.</returns>
+        public int Count()
+        {
+            return this.commands.Count;
         }
 
         /// <summary>
@@ -188,10 +191,7 @@ namespace CommandAggregatorExample.CmdAgg
         /// <returns></returns>
         public bool Exists(string key)
         {
-            lock (this.commands)
-            {
-                return this.commands.Any(k => k.Key == key);            
-            }            
+            return this.commands.Any(k => k.Key == key);                                
         }
 
         /// <summary>
