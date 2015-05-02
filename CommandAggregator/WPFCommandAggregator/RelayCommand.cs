@@ -52,19 +52,32 @@ namespace WPFCommandAggregator
             _canExecute = canExecute;
         }
 
-        [DebuggerStepThrough]
-        public bool CanExecute(object parameter)
+        /// <summary>
+        /// The CanExecute method. Calls the given CanExecute delegate.
+        /// </summary>
+        /// <param name="parameter">The CanExecute parameter value.</param>
+        /// <returns>
+        /// True, if command can be executed; false otheriwse.
+        /// </returns>
+        public virtual bool CanExecute(object parameter)
         {
             return _canExecute == null ? true : _canExecute(parameter);
         }
 
+        /// <summary>
+        /// Registration of the CanExecute. Listening for changes using the CommandManager.
+        /// </summary>
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public void Execute(object parameter)
+        /// <summary>
+        /// The Execute method. Calls the given Execute delegate.
+        /// </summary>
+        /// <param name="parameter">The Execute parameter value.</param>
+        public virtual void Execute(object parameter)
         {
             _execute(parameter);
         }
