@@ -1,0 +1,70 @@
+﻿<Window x:Class="CommandAggregatorExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Command Aggregator Example"
+        Width="350"
+        Height="250"
+        WindowStartupLocation="CenterScreen">
+
+    <DockPanel Style="{StaticResource dockPanelStyle}">
+        <Menu DockPanel.Dock="Top">
+
+            <MenuItem Command="{Binding CmdAgg[SaveAll]}"
+                      CommandParameter="XYZ"
+                      Header="Save All" />
+            <MenuItem Command="{Binding CmdAgg[SaveCmd1]}" Header="Save Item 1" />
+            <MenuItem Command="{Binding CmdAgg[SaveCmd2]}" Header="Save Item 2" />
+
+        </Menu>
+
+        <Border BorderBrush="LightBlue"
+                BorderThickness="1"
+                DockPanel.Dock="Top">
+            <WrapPanel Background="Transparent">
+                <Button Command="{Binding CmdAgg[Exit]}"
+                        Content="Exit"
+                        Template="{StaticResource buttonTemplate}" />
+                <Button Command="{Binding CmdAgg[SaveAll]}"
+                        Content="Save all"
+                        Template="{StaticResource buttonTemplate}" />
+                <Button Command="{Binding CmdAgg[Print]}"
+                        Content="Print"
+                        Template="{StaticResource buttonTemplate}" />
+                <Button Command="{Binding CmdAgg[Options]}"
+                        Content="Options"
+                        Template="{StaticResource buttonTemplate}" />
+                <Button Command="{Binding CmdAgg[About]}"
+                        Content="About"
+                        Template="{StaticResource buttonTemplate}" />
+                <Button Command="{Binding CmdAgg[AboutAsnyc]}"
+                        CommandParameter="async"
+                        Content="AboutAsnyc"
+                        Template="{StaticResource buttonTemplate}" />
+            </WrapPanel>
+        </Border>
+
+        <Border BorderBrush="LightBlue"
+                BorderThickness="1"
+                DockPanel.Dock="Left">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="3" Text="Demonstrating the HierarchyCommand" />
+                <CheckBox Margin="3"
+                          Content="Allow Saving Item 1"
+                          IsChecked="{Binding Path=CanSave1,
+                                              UpdateSourceTrigger=PropertyChanged,
+                                              Mode=TwoWay}" />
+                <CheckBox Margin="3"
+                          Content="Allow Saving Item 2"
+                          IsChecked="{Binding Path=CanSave2,
+                                              UpdateSourceTrigger=PropertyChanged,
+                                              Mode=TwoWay}" />
+            </StackPanel>
+        </Border>
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Amazing window content :-)"
+                   TextWrapping="Wrap" />
+
+    </DockPanel>
+</Window>
