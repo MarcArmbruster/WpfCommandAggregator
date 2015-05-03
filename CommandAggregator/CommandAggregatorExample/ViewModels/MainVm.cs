@@ -104,8 +104,8 @@ namespace CommandAggregatorExample.ViewModels
             this.CmdAgg.AddOrSetCommand("SaveCmd2", save2Cmd);
 
             HierarchyCommand saveAllCmd = new HierarchyCommand(
-                p1 => MessageBox.Show("Save all called -> this schould never appear with this configuration :-)"),
-                p2 => true,
+                p1 => { },
+                null,
                 HierarchyExecuteStrategy.AllChildsOnly,
                 HierarchyCanExecuteStrategy.DependsOnAllChilds);
 
