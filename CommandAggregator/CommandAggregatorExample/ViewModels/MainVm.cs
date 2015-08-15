@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using WPFCommandAggregator.Implementation;
+using WPFCommandAggregator;
 
 namespace CommandAggregatorExample.ViewModels
 {
@@ -31,7 +31,7 @@ namespace CommandAggregatorExample.ViewModels
         /// <summary>
         /// The save all checker.
         /// </summary>
-        private PerformanceChecker printOutChecker = new PerformanceChecker("PrintOut");
+        private PerformanceChecker performanceChecker = new PerformanceChecker("PrintOut");
 
         /// <summary>
         /// The can save1 value.
@@ -97,7 +97,7 @@ namespace CommandAggregatorExample.ViewModels
         {
             // AddOrSetCommand method is overridden --> provide ICommad or Action / Predicate delegates
             this.CmdAgg.AddOrSetCommand("Exit", new RelayCommand(p1 => MessageBox.Show("Exit called"), p2 => true));
-            this.CmdAgg.AddOrSetCommand("Print", new RelayCommand(p1 => MessageBox.Show("Print called"), p2 => true, this.printOutChecker.Start, this.printOutChecker.Stop));
+            this.CmdAgg.AddOrSetCommand("Print", new RelayCommand(p1 => MessageBox.Show("Print called"), p2 => true, this.performanceChecker.Start, this.performanceChecker.Stop));
             this.CmdAgg.AddOrSetCommand("Options", new RelayCommand(p1 => MessageBox.Show("Options called"), p2 => true));
             this.CmdAgg.AddOrSetCommand("About", new RelayCommand(p1 => MessageBox.Show("About" + (p1 == null ? string.Empty : " [" + p1 + "]") + " called"), p2 => true));
             this.CmdAgg.AddOrSetCommand("AboutAsnyc", new RelayCommand(p1 => OpenAboutAsync(p1), p2 => true));
