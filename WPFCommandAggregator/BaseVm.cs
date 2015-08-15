@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
-using WPFCommandAggregator.Interfaces;
 
-namespace WPFCommandAggregator.Implementation
+namespace WPFCommandAggregator
 {
     /// <summary>
     /// Base View Model

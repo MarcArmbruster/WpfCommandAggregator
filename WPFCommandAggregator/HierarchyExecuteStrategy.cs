@@ -1,7 +1,7 @@
-﻿namespace WPFCommandAggregator.Implementation
+﻿namespace WPFCommandAggregator
 {
     /// <summary>
-    /// The strategy the command depend on its childs for CanExecute.
+    /// The strategy the command depend on its childs for Execute.
     /// </summary>      
     /// <remarks>
     ///   <para><b>History</b></para>
@@ -20,21 +20,21 @@
     ///   </item>
     ///   </list>
     /// </remarks>
-    public enum HierarchyCanExecuteStrategy
+    public enum HierarchyExecuteStrategy
     {
         /// <summary>
-        /// Master command can be executed by its own CanExecute property value. It does not depend on childs.
+        /// Executes only the master command.
         /// </summary>
-        DependsOnMasterCommandOnly = 0,
+        MasterCommandOnly = 0,
 
         /// <summary>
-        /// Master command can be executed only if all child commands can be executed. CanExecute of Master will not be considered.
+        /// Executes only childs commands.
         /// </summary>
-        DependsOnAllChilds = 1,
+        AllChildsOnly = 1,
 
         /// <summary>
-        /// Master command can be executed only if at least one child commands can be executed. CanExecute of Master will not be considered.
+        /// Executes Master command and all child commands (childs first).
         /// </summary>
-        DependsOnAtLeastOneChild = 2
+        MasterAndAllChilds = 2
     }
 }

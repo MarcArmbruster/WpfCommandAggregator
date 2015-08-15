@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
-namespace WPFCommandAggregator.Implementation
+namespace WPFCommandAggregator
 {
     /// <summary>
     /// Hierarchy Command. This command type can have child commands.

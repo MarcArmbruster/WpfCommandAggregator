@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
-using WPFCommandAggregator.Interfaces;
 
-namespace WPFCommandAggregator.Implementation
+namespace WPFCommandAggregator
 {
     /// <summary>
     /// Factory class for new command aggregator instances.
