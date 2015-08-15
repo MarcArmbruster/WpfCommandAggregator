@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace WPFCommandAggregator.Implementation
+namespace WPFCommandAggregator
 {
     /// <summary>
     /// Relay Command based on Josh Smith's implementation.

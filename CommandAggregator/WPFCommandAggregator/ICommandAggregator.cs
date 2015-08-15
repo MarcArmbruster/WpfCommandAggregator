@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WPFCommandAggregator.Interfaces
+namespace WPFCommandAggregator
 {
     /// <summary>
     /// Command Aggregator interface.   
