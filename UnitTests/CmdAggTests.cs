@@ -3,8 +3,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WPFCommandAggregator.Implementation;
-using WPFCommandAggregator.Interfaces;
+using WPFCommandAggregator;
 using System.Collections.Generic;
 
 namespace UnitTests
