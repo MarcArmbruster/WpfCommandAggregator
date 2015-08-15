@@ -3,7 +3,9 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WPFCommandAggregator;
+using WPFCommandAggregator.Implementation;
+using WPFCommandAggregator.Interfaces;
+using System.Collections.Generic;
 
 namespace UnitTests
 {
@@ -33,7 +35,7 @@ namespace UnitTests
         [TestMethod]
         public void AddAndExistsTest()
         {
-            CommandAggregator cmdAgg = new CommandAggregator();
+            ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator();
            
             cmdAgg.AddOrSetCommand("TestCommand1", new RelayCommand(p1 => { }, p2 => true));
             cmdAgg.AddOrSetCommand("TestCommand2", new RelayCommand(p1 => { }, p2 => true));
@@ -49,9 +51,25 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void CollectionConstructionTest()
+        {
+            ICommand cmd1 = new RelayCommand(p1 => { }, p2 => true);
+            ICommand cmd2 = new RelayCommand(p1 => { }, p2 => true);
+
+            var commandList = new List<KeyValuePair<string, ICommand>>();
+            commandList.Add(new KeyValuePair<string, ICommand>("A", cmd1));
+            commandList.Add(new KeyValuePair<string, ICommand>("B", cmd2));
+            ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator(commandList);
+           
+            Assert.IsTrue(cmdAgg.Exists("A"));
+            Assert.IsTrue(cmdAgg.Exists("B"));
+            Assert.IsTrue(cmdAgg.Count() == 2);
+        }
+
+        [TestMethod]
         public void HasNullCommandTest()
         {
-            CommandAggregator cmdAgg = new CommandAggregator();
+            ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator();
 
             cmdAgg.AddOrSetCommand("TestCommand1", null);
             cmdAgg.AddOrSetCommand("TestCommand2", new RelayCommand(p1 => { }, p2 => true));
@@ -63,7 +81,7 @@ namespace UnitTests
         [TestMethod]
         public void CountTest()
         {
-            CommandAggregator cmdAgg = new CommandAggregator();
+            ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator();
 
             Assert.AreEqual(0, cmdAgg.Count());
             cmdAgg.AddOrSetCommand("TestCommand1", new RelayCommand(p1 => { }, p2 => true));
@@ -75,7 +93,7 @@ namespace UnitTests
         [TestMethod]
         public void RemoveTest()
         {
-            CommandAggregator cmdAgg = new CommandAggregator();
+            ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator();
             cmdAgg.AddOrSetCommand("TestCommand1", new RelayCommand(p1 => { }, p2 => true));
             cmdAgg.AddOrSetCommand("TestCommand2", new RelayCommand(p1 => { }, p2 => true));
             cmdAgg.AddOrSetCommand("TestCommand3", new RelayCommand(p1 => { }, p2 => true));
@@ -104,7 +122,7 @@ namespace UnitTests
         [TestMethod]
         public void GetCommandAndIndexerAndExecuteTest()
         {
-            CommandAggregator cmdAgg = new CommandAggregator();
+            ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator();
             StringBuilder strBld = new StringBuilder(1000);
 
             cmdAgg.AddOrSetCommand("TestCommand1", new RelayCommand(p1 => { strBld.Append("1"); }, p2 => true));
@@ -131,7 +149,7 @@ namespace UnitTests
         [TestMethod]
         public void ExecuteAsyncTest()
         {
-            CommandAggregator cmdAgg = new CommandAggregator();
+            ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator();
             StringBuilder strBld = new StringBuilder(1000);
 
             cmdAgg.AddOrSetCommand("TestCommand1", new RelayCommand(p1 => { strBld.Append("1"); }, p2 => true));
@@ -158,7 +176,7 @@ namespace UnitTests
         [TestMethod]
         public void CanExecuteTest()
         {
-            CommandAggregator cmdAgg = new CommandAggregator();
+            ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator();
             StringBuilder strBld = new StringBuilder(1000);
 
             cmdAgg.AddOrSetCommand("TestCommand1", new RelayCommand(p1 => { strBld.Append("1"); }, p2 => true));
@@ -181,6 +199,24 @@ namespace UnitTests
         
             ICommand cmd5 = cmdAgg["TestCommand5"];
             Assert.IsTrue(cmd5.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void CommandOverrideTest()
+        {
+            ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator();
+            StringBuilder strBld = new StringBuilder(1000);
+
+            cmdAgg.AddOrSetCommand("TestCommand1", new RelayCommand(p1 => { strBld.Append("1"); }, p2 => true));
+            cmdAgg.AddOrSetCommand("TestCommand2", new RelayCommand(p1 => { strBld.Append("2"); }, p2 => false));
+           
+            cmdAgg.AddOrSetCommand("TestCommand1", new RelayCommand(p1 => { strBld.Append("3"); }, p2 => true));
+            cmdAgg.AddOrSetCommand("TestCommand2", p1 => { strBld.Append("4"); }, p2 => true);
+
+            cmdAgg["TestCommand1"].Execute(null);
+            cmdAgg["TestCommand2"].Execute(null);
+            
+            Assert.AreEqual("34", strBld.ToString());            
         }
     }
 }

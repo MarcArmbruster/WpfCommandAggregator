@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace WPFCommandAggregator
+﻿namespace WPFCommandAggregator.Implementation
 {
     /// <summary>
     /// The strategy the command depend on its childs for Execute.

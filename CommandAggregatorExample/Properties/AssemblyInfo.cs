@@ -7,12 +7,12 @@ using System.Windows;
 [assembly: AssemblyConfiguration(".net 4.5.1")]
 [assembly: AssemblyCompany("Marc Armbruster")]
 [assembly: AssemblyProduct("WPF Command Aggregator")]
-[assembly: AssemblyCopyright("Copyright © Marc Armbruster 2014")]
+[assembly: AssemblyCopyright("Copyright © Marc Armbruster 2014-2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 
-[assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
