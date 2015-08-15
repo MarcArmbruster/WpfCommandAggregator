@@ -46,14 +46,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implementation\CommandAggregator.cs" />
-    <Compile Include="Implementation\CommandAggregatorFactory.cs" />
-    <Compile Include="Implementation\BaseVm.cs" />
-    <Compile Include="Implementation\HierarchyCommand.cs" />
-    <Compile Include="Implementation\HierarchyCanExecuteStrategy.cs" />
-    <Compile Include="Implementation\HierarchyExecuteStrategy.cs" />
-    <Compile Include="Interfaces\ICommandAggregator.cs" />
-    <Compile Include="Implementation\RelayCommand.cs" />
+    <Compile Include="CommandAggregator.cs" />
+    <Compile Include="CommandAggregatorFactory.cs" />
+    <Compile Include="BaseVm.cs" />
+    <Compile Include="HierarchyCommand.cs" />
+    <Compile Include="HierarchyCanExecuteStrategy.cs" />
+    <Compile Include="HierarchyExecuteStrategy.cs" />
+    <Compile Include="ICommandAggregator.cs" />
+    <Compile Include="RelayCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
