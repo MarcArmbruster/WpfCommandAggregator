@@ -1,4 +1,4 @@
-﻿namespace WPFCommandAggregator
+﻿namespace WPFCommandAggregator.Implementation
 {
     /// <summary>
     /// The strategy the command depend on its childs for CanExecute.

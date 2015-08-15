@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
+using WPFCommandAggregator.Interfaces;
 
-namespace WPFCommandAggregator
+namespace WPFCommandAggregator.Implementation
 {
     /// <summary>
     /// Base View Model
@@ -41,7 +42,7 @@ namespace WPFCommandAggregator
         /// <summary>
         /// The command aggregate.
         /// </summary>
-        private CommandAggregator cmdAgg = new CommandAggregator();
+        private ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator();
 
         /// <summary>
         /// Gets the command aggregate.
@@ -49,7 +50,7 @@ namespace WPFCommandAggregator
         /// <value>
         /// The command aggregate.
         /// </value>
-        public CommandAggregator CmdAgg
+        public ICommandAggregator CmdAgg
         {
             get
             {

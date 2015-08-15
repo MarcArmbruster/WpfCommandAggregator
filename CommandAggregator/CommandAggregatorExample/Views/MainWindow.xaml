@@ -6,6 +6,12 @@
         Height="250"
         WindowStartupLocation="CenterScreen">
 
+    <Window.InputBindings>
+        <KeyBinding Key="P"
+                    Command="{Binding CmdAgg[Print]}"
+                    Modifiers="Ctrl" />
+    </Window.InputBindings>
+
     <DockPanel Style="{StaticResource dockPanelStyle}">
         <Menu DockPanel.Dock="Top">
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
-namespace WPFCommandAggregator
+namespace WPFCommandAggregator.Implementation
 {
     /// <summary>
     /// Hierarchy Command. This command type can have child commands.
@@ -157,7 +157,7 @@ namespace WPFCommandAggregator
                 return;
             }
 
-            foreach (var childCommand in this.ChildCommands.Reverse())
+            foreach (var childCommand in this.ChildCommands.Where(c => c != null).Reverse())
             {
                 childCommand.Execute(parameter);
             }
@@ -175,7 +175,7 @@ namespace WPFCommandAggregator
                 return false;
             }
 
-            return this.ChildCommands.All(canExec => canExec.CanExecute(parameter) == true);
+            return this.ChildCommands.Where(ce => ce != null).All(canExec => canExec.CanExecute(parameter) == true);
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace WPFCommandAggregator
                 return false;
             }
 
-            return this.ChildCommands.Any(canExec => canExec.CanExecute(parameter) == true);
+            return this.ChildCommands.Where(ce => ce != null).Any(canExec => canExec.CanExecute(parameter) == true);
         }
 
         #endregion Private Methods
