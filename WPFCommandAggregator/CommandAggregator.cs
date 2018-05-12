@@ -32,7 +32,7 @@ namespace WPFCommandAggregator
     ///   </item>
     ///   </list>
     /// </remarks>
-    public class CommandAggregator : ICommandAggregator
+    public sealed class CommandAggregator : ICommandAggregator
     {
         #region Private Members
 
@@ -73,7 +73,7 @@ namespace WPFCommandAggregator
         /// </summary>
         ~CommandAggregator()
         {
-            this.commands.Clear();
+            this.commands?.Clear();
         }
 
         #endregion Constructors
@@ -109,14 +109,7 @@ namespace WPFCommandAggregator
         {
             if (string.IsNullOrEmpty(key) == false)
             {
-                if (this.commands.Any(k => k.Key == key))
-                {
-                    this.commands[key] = command;
-                }
-                else
-                {
-                    this.commands.AddOrUpdate(key, command, (exkey, excmd) => command);
-                }
+                this.commands[key] = command;                
             }
         }
 
@@ -130,15 +123,7 @@ namespace WPFCommandAggregator
         {
             if (string.IsNullOrEmpty(key) == false)
             {
-                if (this.commands.Any(k => k.Key == key))
-                {
-                    this.commands[key] = new RelayCommand(executeDelegate, canExecuteDelegate);
-                }
-                else
-                {
-                    ICommand command = new RelayCommand(executeDelegate, canExecuteDelegate);
-                    this.commands.AddOrUpdate(key, command, (exkey, excmd) => command);
-                }
+                this.commands[key] = new RelayCommand(executeDelegate, canExecuteDelegate);                
             }
         }
 
@@ -175,10 +160,10 @@ namespace WPFCommandAggregator
         /// Checks the existance of a command for the given key.
         /// </summary>
         /// <param name="key">The command key.</param>
-        /// <returns></returns>
+        /// <returns>True if key exists.</returns>
         public bool Exists(string key)
         {
-            return this.commands.Any(k => k.Key == key);
+            return this.commands.ContainsKey(key);
         }
 
         /// <summary>
@@ -188,7 +173,7 @@ namespace WPFCommandAggregator
         /// <returns>The command for the given key (Empty command if not found/exists).</returns>
         public ICommand GetCommand(string key)
         {
-            if (this.commands.Any(k => k.Key == key))
+            if (this.Exists(key))
             {
                 return this.commands[key];
             }
@@ -198,6 +183,7 @@ namespace WPFCommandAggregator
                 return new RelayCommand(p1 => { });
             }
         }
+
         /// <summary>
         /// Determines whether the ICommand corresponding the specified key is null.
         /// </summary>
@@ -211,7 +197,7 @@ namespace WPFCommandAggregator
                 return false;
             }
 
-            return this.commands.FirstOrDefault(k => k.Key == key).Value == null;
+            return this.commands[key] == null;
         }
 
         /// <summary>
@@ -220,7 +206,7 @@ namespace WPFCommandAggregator
         /// <param name="key">The command key.</param>
         public void Remove(string key)
         {
-            if (this.commands.Any(k => k.Key == key))
+            if (this.Exists(key))
             {
                 ICommand oldCommand;
                 this.commands.TryRemove(key, out oldCommand);
@@ -231,12 +217,10 @@ namespace WPFCommandAggregator
         /// Removes all ICommands = Clear-Functionality.
         /// </summary>
         public void RemoveAll()
-        {
-            if (this.commands != null)
-            {
-                this.commands.Clear();
-            }
+        {            
+            this.commands?.Clear();            
         }
+
         #endregion Methods
     }
 }

@@ -117,20 +117,9 @@ namespace WPFCommandAggregator
         /// <param name="parameter">The Execute parameter value.</param>
         public virtual void Execute(object parameter)
         {
-            if (preActionDelegate != null)
-            {
-                preActionDelegate.Invoke();
-            }
-
-            if (this.executeDelegate != null)
-            {
-                this.executeDelegate(parameter);
-            }
-
-            if (postActionDelegate != null)
-            {
-                postActionDelegate.Invoke();
-            }            
+            preActionDelegate?.Invoke();
+            executeDelegate?.Invoke(parameter);
+            postActionDelegate?.Invoke();
         }
 
         /// <summary>

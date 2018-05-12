@@ -1,10 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WPFCommandAggregator;
-using System.Collections.Generic;
 
 namespace UnitTests
 {

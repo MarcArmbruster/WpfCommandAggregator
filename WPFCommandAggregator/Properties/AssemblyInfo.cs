@@ -7,10 +7,10 @@ using System.Runtime.InteropServices;
 // die mit einer Assembly verknüpft sind.
 [assembly: AssemblyTitle("WPFCommandAggregator")]
 [assembly: AssemblyDescription("WPF Command Aggregator")]
-[assembly: AssemblyConfiguration(".net 4.5.1")]
+[assembly: AssemblyConfiguration(".net 4.5.2 or higher")]
 [assembly: AssemblyCompany("Marc Armbruster")]
 [assembly: AssemblyProduct("WPFCommandAggregator")]
-[assembly: AssemblyCopyright("Copyright © Marc Armbruster 2014-2015")]
+[assembly: AssemblyCopyright("Copyright © Marc Armbruster 2014-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,8 +32,8 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.0.0")]
-[assembly: AssemblyFileVersion("1.2.0.0")]
+[assembly: AssemblyVersion("1.3.0.0")]
+[assembly: AssemblyFileVersion("1.3.0.0")]
 [assembly: InternalsVisibleTo("WPFCommandAggregator.Tests")]
-[assembly: InternalsVisibleTo("WPFCommandAggregator.Explorables")]
+//[assembly: InternalsVisibleTo("WPFCommandAggregator.Explorables")]
 

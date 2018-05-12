@@ -28,7 +28,7 @@ namespace WPFCommandAggregator
     ///   </item>
     ///   </list>
     /// </remarks>
-    public class HierarchyCommand : RelayCommand
+    public sealed class HierarchyCommand : RelayCommand
     {
         #region Private Properties
 

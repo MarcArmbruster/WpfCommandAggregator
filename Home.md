@@ -1,10 +1,12 @@
 # WPF Command Aggregator
 The WPF Command Aggregator is a pattern to reduce WPF command definitions to an absolute minimum of code lines (only one per command).
+In Addition a Base-ViewModel class (BaseVm) is provided with a integrated CommandAggregator instance and the DependsOn attribute support.
 
 # Versions
 1.0.0.0 : WPF Command Aggregator
 1.1.0.0 : HierarchyCommand added; Target framework version set to 4.5.1 
 1.2.0.0 : Pre- and post action delegates added; Target framework version set to 4.5.1 
+1.3.0.0 : DependsOn Attribute added and BasVm class optimzed
 
 # The Background
 
@@ -17,7 +19,7 @@ If you have to create views with a lot of functionality (many customers still li
 This leads to a great amount of code lines with very similar structure. 
 
 **Example (+without+ Command Aggregator):**
-{{
+```C#
 private ICommand printCommand;
 public ICommand PrintCommand
 {
@@ -30,16 +32,16 @@ public ICommand PrintCommand
           return this.printCommand;
       }
 }
-}}
+```
 
 All we want to tell is: _PrintCommand_ executes the _Print_ method if it is allowed (_CanPrint_ property).
 
 The WPF Command Aggregator is a solution to reduce the command definitions to a very short and easy to read line of code within a view model class.
 
 **Example (+with+ Command Aggregator):**
-{{
+```C#
 this.CmdAgg.AddOrSetCommand("Print", new RelayCommand(p1 => Print(p1), p2 => CanPrint));
-}}
+```
 
 This is an reduction of about 10 lines (!!!) and (in my opinion) a very easy to read command definition.
 How can this be achieved and how we can use it for bindings (XAML)?
@@ -47,18 +49,17 @@ How can this be achieved and how we can use it for bindings (XAML)?
 # The Implementation
 
 The Command Aggreagtor is a class containing a dictionary (ConcurrentDictionary) to hold commands identified by a string (command name):
-{{
+```C#
 private readonly ConcurrentDictionary<string, ICommand> commands;
 
 public CommandAggregator()
 {
    commands = new ConcurrentDictionary<string, ICommand>();
 }
-}}
+```
 
 A method called _AddOrSetCommand_ (overloaded) provides the registration of new commands:
-
-{{
+```C#
 public void AddOrSetCommand(string key, ICommand command)
 {
    if (this.commands.Any(k => k.Key == key))
@@ -83,13 +84,13 @@ public void AddOrSetCommand(string key, Action<object> executeDelegate, Predicat
       this.commands.AddOrUpdate(key, command, (exkey, excmd) => command);
    }
 }
-}}
+```
 
 So, we have the functionaliy to collect commands within a CommandAggregator class, but how we can use it - especially in Bindings?
 First of all my BaseViewModel class is provided with one CommandAggregator instance and an abstract 
 method called _InitCommands_.
 
-{{
+```C#
 public abstract class BaseVm : INotifyPropertyChanged
 {
    private CommandAggregator cmdAgg = new CommandAggregator();
@@ -110,10 +111,10 @@ public abstract class BaseVm : INotifyPropertyChanged
 
    // ... further elements of the base view model
 }
-}}
+```
 
 The abstract _InitCommands_ method is the place where the commands will be registered/defined within each view model.
-{{
+```C#
 public class MainVm : BaseVm
 {
    protected sealed override void InitCommands()
@@ -123,12 +124,12 @@ public class MainVm : BaseVm
 
    // ... more view model code ...
 }
-}}
+```
 
 But there is still one problem left: How do we bind the commands?
 At this point an indexer can help us. Indexers can be used in Bindings for a OneWay binding. Commands do not use TwoWay bindings, so an indexer within the CommandAggregator class enables us to establish a command binding in XAML.
 
-{{
+```C#
    public ICommand this[string key](string-key)
    {
        get
@@ -150,15 +151,15 @@ At this point an indexer can help us. Indexers can be used in Bindings for a One
           return new RelayCommand(p1 => { });
         }  
       }
-}}
+```
 
 # Usage
 
 In XAML we can use the CommandAggregator instance of the view model like this:
 
-{{
+```C#
 <Button Content="Print" Command="{Binding CmdAgg[Print](Print)}" />
-}}
+```
 
 Indexer binding works with square brackets and the name of the registered command - you do not need any quotation marks!
 
@@ -188,7 +189,7 @@ To configure the dependency of the HierarchyCommand startegies can be used for E
 With these values many business cases can be realized.
 
 +A short example:+
-{{
+```C#
    // Adding a hierarchy command
    ICommand save1Cmd = new RelayCommand(p1 => Save1(), p2 => this.CanSave1);
    ICommand save2Cmd = new RelayCommand(p1 => Save2(), p2 => this.CanSave2);
@@ -204,7 +205,7 @@ With these values many business cases can be realized.
 
    saveAllCmd.AddChildsCommand(new List<ICommand> { save1Cmd, save2Cmd });
    this.CmdAgg.AddOrSetCommand("SaveAll", saveAllCmd); 
-}}
+```
 
 # Pre- and post action delegates (Version 1.2.0.0)
 
@@ -215,7 +216,7 @@ This enables you to add logic to run before and after the command execution dele
 Therefore these delegates enables you to "inject" cross cutting concerns without the need to change your execution delegate logic.
 
 +A short example (performance messurement):+
-{{
+```C#
             this.CmdAgg.AddOrSetCommand(
                                         "Print", 
                                         new RelayCommand(
@@ -223,18 +224,75 @@ Therefore these delegates enables you to "inject" cross cutting concerns without
                                             p2 => true, 
                                             this.performanceChecker.Start, 
                                             this.performanceChecker.Stop));
-}}
+```
 
 The performanceChecker instance is only a wrapper class to start and stop a stopwatch instance and writes the ellapsed time to the debug window. You can use any Action delegate.
 
 When you like to set/change/remove these actions dynamically you can use the corresponding methods of the RelayCommand class.
-{{
+```C#
             RelayCommand cmd = this.CmdAgg["Print"](_Print_) as RelayCommand;
             if (cmd != null)
             {
                  cmd.OverridePostActionDelegate(null);
                  cmd.OverridePreActionDelegate(null);
             }
-}}
+```
+
+# The DependsOn attribute (Version 1.3.0.0)
+
+Sometimes properties of a view model class depends on others. A simlpe example is the calculation of the sum of two input values.
+In a classic way the code of the view model for this purpose could look like that:
+```C#
+        public decimal? FirstInput
+        {
+            get => this.firstInput;
+            set
+            {
+                this.firstInput = value;
+                this.NotifyPropertyChanged(nameof(FirstInput));
+                this.NotifyPropertyChanged(nameof(Result));
+            }
+        }
+
+        public decimal? SecondInput
+        {
+            get => this.secondInput;
+            set
+            {
+                this.secondInput = value;
+                this.NotifyPropertyChanged(nameof(SecondInput));
+                this.NotifyPropertyChanged(nameof(Result));
+            }
+        }
+
+        public decimal? Result
+        {
+            get => this.firstInput + this.secondInput;
+        }
+
+```
+
+With the DependsOn attribute and the optimzed BaseVM class this can be achieved easier and better to read:
+```C#
+        public decimal? FirstInput
+        {
+            get => this.firstInput;
+            set => this.SetPropertyValue(ref this.firstInput, value);
+        }
+
+        public decimal? SecondInput
+        {
+            get => this.secondInput;
+            set => this.SetPropertyValue(ref this.secondInput, value);
+        }
+
+        [DependsOn(nameof(FirstInput), nameof(SecondInput))]
+        public decimal? Result
+        {
+            get => this.firstInput + this.secondInput;
+        }
+
+
+```
 
 (see also the example solution (source code))

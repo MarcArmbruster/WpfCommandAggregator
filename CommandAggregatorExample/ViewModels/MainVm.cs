@@ -44,6 +44,16 @@ namespace CommandAggregatorExample.ViewModels
         private bool canSave2;
 
         /// <summary>
+        /// First user input value.
+        /// </summary>
+        private decimal? firstInput;
+
+        /// <summary>
+        /// Second user input value.
+        /// </summary>
+        private decimal? secondInput;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MainVm"/> class.
         /// </summary>
         public MainVm()
@@ -55,19 +65,11 @@ namespace CommandAggregatorExample.ViewModels
         /// </summary>
         /// <value>
         ///   <c>true</c> if this instance can save1; otherwise, <c>false</c>.
-        /// </value>
+        /// </value>       
         public bool CanSave1
         {
-            get
-            {
-                return this.canSave1;
-            }
-
-            set
-            {
-                this.canSave1 = value;
-                this.OnPropertyChanged("CanSave1");                
-            }
+            get => this.canSave1;            
+            set => this.SetPropertyValue(ref this.canSave1, value);                          
         }
 
         /// <summary>
@@ -75,19 +77,38 @@ namespace CommandAggregatorExample.ViewModels
         /// </summary>
         /// <value>
         ///   <c>true</c> if this instance can save2; otherwise, <c>false</c>.
-        /// </value>
+        /// </value>       
         public bool CanSave2
         {
-            get
-            {
-                return this.canSave2;
-            }
+            get => this.canSave2;
+            set => this.SetPropertyValue(ref this.canSave2, value);
+        }
 
-            set
-            {
-                this.canSave2 = value;
-                this.OnPropertyChanged("CanSave2");                
-            }
+        /// <summary>
+        /// First user input value.
+        /// </summary>
+        public decimal? FirstInput
+        {
+            get => this.firstInput;
+            set => this.SetPropertyValue(ref this.firstInput, value);
+        }
+
+        /// <summary>
+        /// Second user input value.
+        /// </summary>
+        public decimal? SecondInput
+        {
+            get => this.secondInput;
+            set => this.SetPropertyValue(ref this.secondInput, value);
+        }
+
+        /// <summary>
+        /// Sum result for input1 and input2 values.
+        /// </summary>
+        [DependsOn(nameof(FirstInput), nameof(SecondInput))]
+        public decimal? Result
+        {
+            get => this.firstInput + this.secondInput;
         }
 
         /// <summary>

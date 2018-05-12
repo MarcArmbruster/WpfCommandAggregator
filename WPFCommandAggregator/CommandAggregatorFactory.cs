@@ -23,7 +23,7 @@ namespace WPFCommandAggregator
     ///   </item>
     ///   </list>
     /// </remarks>
-    public class CommandAggregatorFactory
+    public sealed class CommandAggregatorFactory
     {
         /// <summary>
         /// Gets the new command aggregator.

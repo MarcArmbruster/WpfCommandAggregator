@@ -3,3 +3,16 @@
 ################################################################################
 
 /CommandAggregatorExample/obj/Debug/App.g.cs
+*.baml
+/CommandAggregatorExample/obj/Debug/Views/MainWindow.g.cs
+*.suo
+/CommandAggregatorExample/bin/Debug
+/CommandAggregatorExample/obj
+/UnitTests/bin/Debug
+/UnitTests/obj
+/WPFCommandAggregator/bin/Debug
+/WPFCommandAggregator/obj
+/.axoCover
+/.vs/CommandAggExample/DesignTimeBuild
+/.vs/CommandAggExample/v15/Server/sqlite3
+/.vs
