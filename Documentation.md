@@ -1,4 +1,4 @@
-#The WPF Command Aggregator
+# The WPF Command Aggregator
 
 ## Source Code
 The source code contains a solution including three projects. 

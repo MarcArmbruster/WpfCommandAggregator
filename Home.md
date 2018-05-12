@@ -272,7 +272,8 @@ In a classic way the code of the view model for this purpose could look like tha
 
 ```
 
-With the DependsOn attribute and the optimzed BaseVM class this can be achieved easier and better to read:
+Wouldn't it be better to define/see the dependencies between the properties at one place: in my opinion the Result property would be a very good place.
+Therefore, with the DependsOn attribute and the optimzed BaseVM class this can be achieved easier and better to read:
 ```C#
         public decimal? FirstInput
         {
@@ -291,8 +292,7 @@ With the DependsOn attribute and the optimzed BaseVM class this can be achieved 
         {
             get => this.firstInput + this.secondInput;
         }
-
-
 ```
+Now, the attribute defines the dependencies and the BaseVM class will do the rest for you (notifications).
 
 (see also the example solution (source code))
