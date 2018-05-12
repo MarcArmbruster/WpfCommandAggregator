@@ -3,10 +3,10 @@ The WPF Command Aggregator is a pattern to reduce WPF command definitions to an 
 In Addition a Base-ViewModel class (BaseVm) is provided with a integrated CommandAggregator instance and the DependsOn attribute support.
 
 ## Versions
-1.0.0.0 : WPF Command Aggregator
-1.1.0.0 : HierarchyCommand added; Target framework version set to 4.5.1 
-1.2.0.0 : Pre- and post action delegates added; Target framework version set to 4.5.1 
-1.3.0.0 : DependsOn Attribute added and BasVm class optimzed
+- 1.0.0.0 : WPF Command Aggregator
+- 1.1.0.0 : HierarchyCommand added; Target framework version set to 4.5.1 
+- 1.2.0.0 : Pre- and post action delegates added; Target framework version set to 4.5.1 
+- 1.3.0.0 : DependsOn Attribute added and BasVm class optimzed
 
 ## The Background
 

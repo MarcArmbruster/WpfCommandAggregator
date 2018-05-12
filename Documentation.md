@@ -17,10 +17,10 @@ Youn can use/import the classes directly into your solution or you can reference
 A nuGet package is und construction and available soon!
 
 # Target Framework
-+ The version 1.3.0.0 binary file is provided for .net 4.5.2 and higher 
-+ The version 1.2.0.0 binary file is provided for .net 4.5.1 and higher 
-+ The version 1.1.0.0 binary file is provided for .net 4.5.1 and higher
-+ The version 1.0.0.0 binary file is provided for .net 4.0 and higher
+- The version 1.3.0.0 binary file is provided for .net 4.5.2 and higher 
+- The version 1.2.0.0 binary file is provided for .net 4.5.1 and higher 
+- The version 1.1.0.0 binary file is provided for .net 4.5.1 and higher
+- The version 1.0.0.0 binary file is provided for .net 4.0 and higher
 But all versions are compatible (source code) with all .net 4.x. versions of the .net Framework.
 
 See the Home.md file for a detailed explanation.
