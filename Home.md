@@ -2,13 +2,13 @@
 The WPF Command Aggregator is a pattern to reduce WPF command definitions to an absolute minimum of code lines (only one per command).
 In Addition a Base-ViewModel class (BaseVm) is provided with a integrated CommandAggregator instance and the DependsOn attribute support.
 
-# Versions
+## Versions
 1.0.0.0 : WPF Command Aggregator
 1.1.0.0 : HierarchyCommand added; Target framework version set to 4.5.1 
 1.2.0.0 : Pre- and post action delegates added; Target framework version set to 4.5.1 
 1.3.0.0 : DependsOn Attribute added and BasVm class optimzed
 
-# The Background
+## The Background
 
 The last few years I worked on many WPF projects (MVVM) with many views and thereof with many command objects. It was quite boring to write similar code for every command definition. The well known RelayCommand (Josh Smith) helps a lot but there is still similar code for every command definition.
 - private ICommand member
@@ -46,7 +46,7 @@ this.CmdAgg.AddOrSetCommand("Print", new RelayCommand(p1 => Print(p1), p2 => Can
 This is an reduction of about 10 lines (!!!) and (in my opinion) a very easy to read command definition.
 How can this be achieved and how we can use it for bindings (XAML)?
 
-# The Implementation
+## The Implementation
 
 The Command Aggreagtor is a class containing a dictionary (ConcurrentDictionary) to hold commands identified by a string (command name):
 ```C#
@@ -153,7 +153,7 @@ At this point an indexer can help us. Indexers can be used in Bindings for a One
       }
 ```
 
-# Usage
+## Usage
 
 In XAML we can use the CommandAggregator instance of the view model like this:
 
@@ -167,7 +167,7 @@ The WPF Command Aggregator is working well in my current and previous projects. 
 
 Thanks to Gerhard Ahrens for all the discussions and testing after work time!
 
-# Hierarchy Command (Version 1.1.0.0)
+## Hierarchy Command (Version 1.1.0.0)
 
 With version 1.1.0.0 the target framework version was set to 4.5.1.
 This version also comes with a new feature - I called it the **HierarchyCommand**.
@@ -207,7 +207,7 @@ With these values many business cases can be realized.
    this.CmdAgg.AddOrSetCommand("SaveAll", saveAllCmd); 
 ```
 
-# Pre- and post action delegates (Version 1.2.0.0)
+## Pre- and post action delegates (Version 1.2.0.0)
 
 This version comes with a new feature - the **pre - and post action delegates**.
 
@@ -238,7 +238,7 @@ When you like to set/change/remove these actions dynamically you can use the cor
             }
 ```
 
-# The DependsOn attribute (Version 1.3.0.0)
+## The DependsOn attribute (Version 1.3.0.0)
 
 Sometimes properties of a view model class depends on others. A simlpe example is the calculation of the sum of two input values.
 In a classic way the code of the view model for this purpose could look like that:
