@@ -16,3 +16,7 @@
 /.vs/CommandAggExample/DesignTimeBuild
 /.vs/CommandAggExample/v15/Server/sqlite3
 /.vs
+/CommandAggregatorExample/bin/Release
+/UnitTests/bin/Release
+/WPFCommandAggregator/bin/Release
+/_nugetPackage/V1.3.0.0
