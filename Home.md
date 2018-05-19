@@ -1,12 +1,13 @@
 # WPF Command Aggregator
-The WPF Command Aggregator is a pattern to reduce WPF command definitions to an absolute minimum of code lines (only one per command).
-In Addition a Base-ViewModel class (BaseVm) is provided with a integrated CommandAggregator instance and the DependsOn attribute support.
+The WPF Command Aggregator is a solution to reduce WPF command definitions to an absolute minimum of code lines (only one per command).
+In addition, a BaseViewModel class (BaseVm) with an integrated command aggregator instance and the DependsOn attribute is supported.
 
 ## Versions
 - 1.0.0.0 : WPF Command Aggregator
 - 1.1.0.0 : HierarchyCommand added; Target framework version set to 4.5.1 
 - 1.2.0.0 : Pre- and post action delegates added; Target framework version set to 4.5.1 
-- 1.3.0.0 : DependsOn Attribute added and BasVm class optimzed
+- 1.3.0.0 : DependsOn Attribute added and BasVm class optimzed; Target framework version set to 4.5.2
+- 1.4.0.0 : Pre and post delegates for BaseVm.AddOrSetCSetPropertyValue method and BaseVm.SuppressNotification property. New overload for ICommandAggregator.AddOrSetCommand
 
 ## The Background
 
@@ -294,5 +295,45 @@ Therefore, with the DependsOn attribute and the optimzed BaseVM class this can b
         }
 ```
 Now, the attribute defines the dependencies and the BaseVM class will do the rest for you (notifications).
+
+## Pre and post set action delegates (Version 1.4.0.0)
+
+In version 1.3.0.0 the SetPropertyValue method was introduced. 
+In some cases in could be helpful to additionally execute some 
+code lines before or - normally - after the set and notification is done.
+In version 1.4.0.0 the possibility to additionally define two action delegates is implemented.
+The following example shows it based on two simple methods of a performance checker instance.
+
+```C#
+        public bool ExampleProperty
+        {
+            get => this.exampleProperty;
+            set => this.SetPropertyValue(
+                ref this.exampleProperty, 
+                value,
+                () => this.performanceChecker.Start(),
+                () => this.performanceChecker.Stop());
+        }
+```
+
+Furthermore the BaseVm class has a new protected property called SuppressNotifications.
+By default this ist set to false. If you want to suppress notifications (e.g. to temporarily improve performance by decoupling from UI)
+
+```C#
+	this.SuppressNotifications = true;
+``` 
+
+The command aggregator interface itself was also extended by a new overload for the AddOrSetCommand method.
+The definition for always executable commands  can shortly defined by omitting the can execute delegate.
+
+The definition
+```C#	
+	this.CmdAgg.AddOrSetCommand("Exit", new RelayCommand(p1 => MessageBox.Show("Exit called"), p2 => true));
+```
+can now be simplified with the following one:
+
+```C#	
+	this.CmdAgg.AddOrSetCommand("Exit", new RelayCommand(p1 => MessageBox.Show("Exit called")));
+```
 
 (see also the example solution (source code))

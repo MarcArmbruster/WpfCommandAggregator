@@ -60,6 +60,17 @@ namespace CommandAggregatorExample.ViewModels
         {           
         }
 
+        private bool exampleProperty;
+        public bool ExampleProperty
+        {
+            get => this.exampleProperty;
+            set => this.SetPropertyValue(
+                ref this.exampleProperty, 
+                value,
+                () => this.performanceChecker.Start(),
+                () => this.performanceChecker.Stop());
+        }
+
         /// <summary>
         /// Gets or sets a value indicating whether this instance can save1.
         /// </summary>
@@ -116,8 +127,8 @@ namespace CommandAggregatorExample.ViewModels
         /// </summary>
         protected sealed override void InitCommands()
         {
-            // AddOrSetCommand method is overridden --> provide ICommad or Action / Predicate delegates
-            this.CmdAgg.AddOrSetCommand("Exit", new RelayCommand(p1 => MessageBox.Show("Exit called"), p2 => true));
+            // AddOrSetCommand method is overridden --> provide ICommad or Action / Predicate delegates            
+            this.CmdAgg.AddOrSetCommand("Exit", new RelayCommand(p1 => MessageBox.Show("Exit called")));
             this.CmdAgg.AddOrSetCommand("Print", new RelayCommand(p1 => MessageBox.Show("Print called"), p2 => true, this.performanceChecker.Start, this.performanceChecker.Stop));
             this.CmdAgg.AddOrSetCommand("Options", new RelayCommand(p1 => MessageBox.Show("Options called"), p2 => true));
             this.CmdAgg.AddOrSetCommand("About", new RelayCommand(p1 => MessageBox.Show("About" + (p1 == null ? string.Empty : " [" + p1 + "]") + " called"), p2 => true));

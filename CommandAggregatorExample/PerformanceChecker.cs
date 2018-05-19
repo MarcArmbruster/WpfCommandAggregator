@@ -54,6 +54,11 @@ namespace CommandAggregatorExample
         }
 
         /// <summary>
+        /// The watch reference.
+        /// </summary>
+        public Stopwatch StopWatch => this.watch;
+
+        /// <summary>
         /// Stops the checker.
         /// </summary>
         public void Stop()
