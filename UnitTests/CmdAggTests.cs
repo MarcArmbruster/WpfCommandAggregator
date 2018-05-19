@@ -70,7 +70,7 @@ namespace UnitTests
         {
             ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator();
 
-            cmdAgg.AddOrSetCommand("TestCommand1", null);
+            cmdAgg.AddOrSetCommand("TestCommand1", (ICommand)null);
             cmdAgg.AddOrSetCommand("TestCommand2", new RelayCommand(p1 => { }, p2 => true));
 
             Assert.IsTrue(cmdAgg.HasNullCommand("TestCommand1"));

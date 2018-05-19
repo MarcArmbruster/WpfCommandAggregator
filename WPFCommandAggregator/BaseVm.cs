@@ -36,6 +36,13 @@ namespace WPFCommandAggregator
         private static ConcurrentDictionary<Type, Dictionary<string, List<string>>> propertyDependencies 
             = new ConcurrentDictionary<Type, Dictionary<string, List<string>>>();
 
+        /// <summary>
+        /// Property to suppress notifications.
+        /// Set to true if you want to supress all notifications.
+        /// Default is false (active notifications).
+        /// </summary>
+        protected bool SuppressNotifications {get; set; }
+
         #region Constructor
 
         /// <summary>
@@ -132,14 +139,18 @@ namespace WPFCommandAggregator
         /// <param name="propertyName"></param>
         private void RaisePropertyChangedEvent(string propertyName)
         {            
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler == null)
+            if (this.SuppressNotifications)
+            {
+                return;
+            }
+
+            if (PropertyChanged == null)
             {
                 return;
             }
 
             var eventArgs = new PropertyChangedEventArgs(propertyName);
-            handler(this, eventArgs);
+            PropertyChanged(this, eventArgs);
         }
 
         /// <summary>
@@ -155,6 +166,22 @@ namespace WPFCommandAggregator
                         
             this.RaisePropertyChangedEvent(propertyName);
             this.RaisePropertyChangedEventForDependendProperties(propertyName);
+        }
+
+        /// <summary>
+        /// Sets the value and raises the property changed event (includes dependend properties).
+        /// </summary>
+        /// <typeparam name="T">The value type.</typeparam>
+        /// <param name="property">The target.</param>
+        /// <param name="value">The new value.</param>
+        /// <param name="preSetAction">An Action that will execute before set and notification is done.</param>
+        /// <param name="postSetAction">An Action that will execute after set and notification is done.</param>
+        /// <param name="propertyName">Name of the property - automatically resolved by the framework if not explicitly defined.</param>
+        protected virtual void SetPropertyValue<T>(ref T property, T value, Action preSetAction,  Action postSetAction, [CallerMemberName] string propertyName = null)
+        {
+            preSetAction?.Invoke();
+            this.SetPropertyValue<T>(ref property, value, propertyName);
+            postSetAction?.Invoke();            
         }
 
         /// <summary>

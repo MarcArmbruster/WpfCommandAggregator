@@ -50,7 +50,14 @@ namespace WPFCommandAggregator
         /// <param name="executeDelegate">The execute delegate.</param>
         /// <param name="canExecuteDelegate">The can execute delegate.</param>
         void AddOrSetCommand(string key, Action<object> executeDelegate, Predicate<object> canExecuteDelegate);
-        
+
+        /// <summary>
+        /// Adds or set the command.
+        /// </summary>
+        /// <param name="key">The command key.</param>
+        /// <param name="executeDelegate">The execute delegate assuming it can always be executed (canExecute is true by definition).</param>
+        void AddOrSetCommand(string key, Action<object> executeDelegate);
+
         /// <summary>
         /// Counts this instance.
         /// </summary>

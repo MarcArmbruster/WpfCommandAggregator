@@ -32,12 +32,26 @@ namespace UnitTests
         /// </summary>
         private class BaseTestViewModel : BaseVm
         {
-            private string testProperty;
-            public string TestProperty
+            private string defaultTestProperty;
+            public string DefaultTestProperty
             {
-                get => this.testProperty;
-                set => this.SetPropertyValue(ref this.testProperty, value);
+                get => this.defaultTestProperty;
+                set => this.SetPropertyValue(ref this.defaultTestProperty, value);
             }
+
+            private string preAndPostActionTestProperty;
+            public string PreAndPostActionTestProperty
+            {
+                get => this.preAndPostActionTestProperty;
+                set => this.SetPropertyValue(
+                    ref this.preAndPostActionTestProperty,                     
+                    value,
+                    () => this.PreSetResult = "before",
+                    () => this.PostSetResult = "after");
+            }
+
+            internal string PreSetResult { get; private set; }
+            internal string PostSetResult { get; private set; }
 
             protected override void InitCommands()
             {
@@ -50,10 +64,20 @@ namespace UnitTests
         {
             BaseTestViewModel testVm = new BaseTestViewModel();
 
-            testVm.TestProperty = "Dummy";
-            Assert.AreEqual("Dummy", testVm.TestProperty);
+            testVm.DefaultTestProperty = "Dummy";
+            Assert.AreEqual("Dummy", testVm.DefaultTestProperty);
 
             Assert.IsTrue(testVm.CmdAgg.Exists("TestCommand"));
         }
+
+        [TestMethod]
+        public void PreAndPostSetActionTest()
+        {
+            BaseTestViewModel testVm = new BaseTestViewModel();
+
+            testVm.PreAndPostActionTestProperty = "Something";
+            Assert.AreEqual("before", testVm.PreSetResult);
+            Assert.AreEqual("after", testVm.PostSetResult);            
+        }        
     }
 }

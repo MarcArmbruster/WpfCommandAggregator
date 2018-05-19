@@ -73,7 +73,7 @@ namespace WPFCommandAggregator
         /// </summary>
         ~CommandAggregator()
         {
-            this.commands?.Clear();
+            this.RemoveAll();
         }
 
         #endregion Constructors
@@ -83,7 +83,7 @@ namespace WPFCommandAggregator
         /// <summary>
         /// Gets the <see cref="ICommand"/> with the specified key.
         /// Indexer access is important for usage in XAML DataBindings.
-        /// Please Note: indexers can only be used for OneWay-Mode in
+        /// Please Note: this indexer can only be used for OneWay-Mode in
         /// XAML-Bindings (read only).
         /// </summary>
         /// <value>
@@ -128,6 +128,19 @@ namespace WPFCommandAggregator
         }
 
         /// <summary>
+        /// Adds or set the command.
+        /// </summary>
+        /// <param name="key">The command key.</param>
+        /// <param name="executeDelegate">The execute delegate assuming it can always be executed (canExecute is true by definition).</param>
+        public void AddOrSetCommand(string key, Action<object> executeDelegate)
+        {
+            if (string.IsNullOrEmpty(key) == false)
+            {
+                this.commands[key] = new RelayCommand(executeDelegate, x => true);
+            }
+        }
+
+        /// <summary>
         /// Counts the registered commands.
         /// </summary>
         /// <returns>Number of registered commands.</returns>
@@ -150,10 +163,10 @@ namespace WPFCommandAggregator
         {
             if (this.Exists(key) == false)
             {
-                return Task.Factory.StartNew(() => { });
+                return Task.Run(() => { });
             }
 
-            return Task.Factory.StartNew(() => this.GetCommand(key).Execute(parameter));
+            return Task.Run(() => this.GetCommand(key).Execute(parameter));
         }
 
         /// <summary>
@@ -177,11 +190,9 @@ namespace WPFCommandAggregator
             {
                 return this.commands[key];
             }
-            else
-            {
-                // Empty command (to avoid null reference exceptions)
-                return new RelayCommand(p1 => { });
-            }
+            
+            // Fallback: empty command (to avoid null reference exceptions)
+            return new RelayCommand(p1 => { });            
         }
 
         /// <summary>
