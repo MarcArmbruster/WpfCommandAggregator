@@ -2,6 +2,8 @@
 The WPF Command Aggregator is a solution to reduce WPF command definitions to an absolute minimum of code lines (only one per command).
 In addition, a BaseViewModel class (BaseVm) with an integrated command aggregator instance and the DependsOn attribute is supported.
 
+Since 07/2018 there is also a UWP version of the CommandAggregator: [UWP Command Aggregator](https://github.com/MarcArmbruster/UwpCommandAggregator)
+
 ## Versions
 - 1.0.0.0 : WPF Command Aggregator
 - 1.1.0.0 : HierarchyCommand added; Target framework version set to 4.5.1 
@@ -65,7 +67,7 @@ public void AddOrSetCommand(string key, ICommand command)
 {
    if (this.commands.Any(k => k.Key == key))
    {
-      this.commands[key](key) = command;
+      this.commands[key] = command;
    }
    else
    {
@@ -77,7 +79,7 @@ public void AddOrSetCommand(string key, Action<object> executeDelegate, Predicat
 {
    if (this.commands.Any(k => k.Key == key))
    {
-      this.commands[key](key) = new RelayCommand(executeDelegate, canExecuteDelegate);
+      this.commands[key] = new RelayCommand(executeDelegate, canExecuteDelegate);
    }
    else
    {
@@ -131,7 +133,7 @@ But there is still one problem left: How do we bind the commands?
 At this point an indexer can help us. Indexers can be used in Bindings for a OneWay binding. Commands do not use TwoWay bindings, so an indexer within the CommandAggregator class enables us to establish a command binding in XAML.
 
 ```C#
-   public ICommand this[string key](string-key)
+   public ICommand this[string key]
    {
        get
        {
@@ -144,7 +146,7 @@ At this point an indexer can help us. Indexers can be used in Bindings for a One
     {
        if (this.commands.Any(k => k.Key == key))
        {
-          return this.commands[key](key);
+          return this.commands[key];
        }
        else
        {
@@ -159,7 +161,7 @@ At this point an indexer can help us. Indexers can be used in Bindings for a One
 In XAML we can use the CommandAggregator instance of the view model like this:
 
 ```C#
-<Button Content="Print" Command="{Binding CmdAgg[Print](Print)}" />
+<Button Content="Print" Command="{Binding CmdAgg[Print]}" />
 ```
 
 Indexer binding works with square brackets and the name of the registered command - you do not need any quotation marks!
@@ -231,7 +233,7 @@ The performanceChecker instance is only a wrapper class to start and stop a stop
 
 When you like to set/change/remove these actions dynamically you can use the corresponding methods of the RelayCommand class.
 ```C#
-            RelayCommand cmd = this.CmdAgg["Print"](_Print_) as RelayCommand;
+            RelayCommand cmd = this.CmdAgg["Print"] as RelayCommand;
             if (cmd != null)
             {
                  cmd.OverridePostActionDelegate(null);
@@ -296,7 +298,7 @@ Therefore, with the DependsOn attribute and the optimzed BaseVM class this can b
 ```
 Now, the attribute defines the dependencies and the BaseVM class will do the rest for you (notifications).
 
-## Pre and post set action delegates (Version 1.4.0.0)
+## SetPropertyValue (Version 1.4.0.0)
 
 In version 1.3.0.0 the SetPropertyValue method was introduced. 
 In some cases in could be helpful to additionally execute some 
@@ -320,7 +322,7 @@ Furthermore the BaseVm class has a new protected property called SuppressNotific
 By default this ist set to false. If you want to suppress notifications (e.g. to temporarily improve performance by decoupling from UI)
 
 ```C#
-	this.SuppressNotifications = true;
+    this.SuppressNotifications = true;
 ``` 
 
 The command aggregator interface itself was also extended by a new overload for the AddOrSetCommand method.
@@ -328,12 +330,12 @@ The definition for always executable commands  can shortly defined by omitting t
 
 The definition
 ```C#	
-	this.CmdAgg.AddOrSetCommand("Exit", new RelayCommand(p1 => MessageBox.Show("Exit called"), p2 => true));
+    this.CmdAgg.AddOrSetCommand("Exit", new RelayCommand(p1 => MessageBox.Show("Exit called"), p2 => true));
 ```
 can now be simplified with the following one:
 
 ```C#	
-	this.CmdAgg.AddOrSetCommand("Exit", new RelayCommand(p1 => MessageBox.Show("Exit called")));
+    this.CmdAgg.AddOrSetCommand("Exit", new RelayCommand(p1 => MessageBox.Show("Exit called")));
 ```
 
 (see also the example solution (source code))
