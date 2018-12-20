@@ -21,7 +21,7 @@ If you have to create views with a lot of functionality (many customers still li
 
 This leads to a great amount of code lines with very similar structure. 
 
-**Example (+without+ Command Aggregator):**
+**Example (without Command Aggregator):**
 ```C#
 private ICommand printCommand;
 public ICommand PrintCommand
@@ -41,7 +41,7 @@ All we want to tell is: _PrintCommand_ executes the _Print_ method if it is allo
 
 The WPF Command Aggregator is a solution to reduce the command definitions to a very short and easy to read line of code within a view model class.
 
-**Example (+with+ Command Aggregator):**
+**Example (with Command Aggregator):**
 ```C#
 this.CmdAgg.AddOrSetCommand("Print", new RelayCommand(p1 => Print(p1), p2 => CanPrint));
 ```
@@ -191,7 +191,7 @@ To configure the dependency of the HierarchyCommand startegies can be used for E
 
 With these values many business cases can be realized.
 
-+A short example:+
+**A short example:**
 ```C#
    // Adding a hierarchy command
    ICommand save1Cmd = new RelayCommand(p1 => Save1(), p2 => this.CanSave1);
