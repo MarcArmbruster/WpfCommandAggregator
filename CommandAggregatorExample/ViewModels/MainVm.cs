@@ -32,12 +32,7 @@ namespace CommandAggregatorExample.ViewModels
         /// The save all checker.
         /// </summary>
         private PerformanceChecker performanceChecker = new PerformanceChecker("PrintOut");
-
-        /// <summary>
-        /// The can save1 value.
-        /// </summary>
-        private bool canSave1;
-
+      
         /// <summary>
         /// The can save2 value.
         /// </summary>
@@ -79,8 +74,10 @@ namespace CommandAggregatorExample.ViewModels
         /// </value>       
         public bool CanSave1
         {
-            get => this.canSave1;            
-            set => this.SetPropertyValue(ref this.canSave1, value);                          
+            // using NO private field -> using automatic values storage (base class).
+
+            get => this.GetPropertyValue<bool>();
+            set => this.SetPropertyValue<bool>(value);                          
         }
 
         /// <summary>
