@@ -161,7 +161,7 @@ namespace WPFCommandAggregator
         /// <param name="propertyName">Name of the property - automatically resolved by the framework if not explicitly defined.</param>
         protected virtual void SetPropertyValue<T>(ref T property, T value, [CallerMemberName] string propertyName = null)
         {
-            bool notify = !Equals(property, value);
+            bool notify = !Equals(property, value) && !this.SuppressNotifications;
             property = value;
 
             if (notify)
@@ -198,7 +198,7 @@ namespace WPFCommandAggregator
         /// <param name="propertyName">Name of the property - automatically resolved by the framework if not explicitly defined.</param>
         protected void SetPropertyValue<T>(T value, [CallerMemberName] string propertyName = "")
         {
-            bool notify = !Equals(value, GetPropertyValue<T>(propertyName));
+            bool notify = !Equals(value, GetPropertyValue<T>(propertyName)) && !this.SuppressNotifications;
 
             this.values[propertyName] = value;
 
@@ -245,7 +245,6 @@ namespace WPFCommandAggregator
 
             return (T)this.values[propertyName];
         }
-
 
         /// <summary>
         /// Calls the property changed event (includes dependend properties).
