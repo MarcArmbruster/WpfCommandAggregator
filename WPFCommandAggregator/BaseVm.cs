@@ -261,7 +261,7 @@ namespace WPFCommandAggregator
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         [Obsolete("Please use method SetPropertyValue or NotifyPropertyChanged instead. " +
-                  "This method will be removed in further versions.")]
+                  "This method will be removed in further versions (up from nuGet package version 1.6.)")]
         protected virtual void OnPropertyChanged(string propertyName)
         {
             this.NotifyPropertyChanged(propertyName);

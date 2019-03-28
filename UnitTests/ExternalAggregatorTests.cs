@@ -7,7 +7,7 @@ using WPFCommandAggregator;
 namespace UnitTests
 {
     /// <summary>
-    /// Tests for BaseVm class.
+    /// Tests for register/unregister a cusatom aggregator implementation.
     /// </summary>   
     /// <remarks>
     ///   <para><b>History</b></para>

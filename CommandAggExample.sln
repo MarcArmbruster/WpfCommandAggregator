@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFCommandAggregator", "WPFCommandAggregator\WPFCommandAggregator.csproj", "{60BAC595-6624-44FF-A25F-18EEA51A2DB6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{7BB056B7-D600-4647-840E-8A7E8FDBE7D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandAggreagtorExample", "CommandAggregatorExample\CommandAggreagtorExample.csproj", "{5EF5F052-0735-4262-ADB1-06C67FA515BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A6DEFE6-1235-4868-9B83-6176E6E9ADEC}"
+	ProjectSection(SolutionItems) = preProject
+		Home.md = Home.md
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +36,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF1D4828-D1F1-4655-94CC-71FD8FF0F6A6}
 	EndGlobalSection
 EndGlobal
