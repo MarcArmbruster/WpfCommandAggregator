@@ -46,6 +46,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\ObservableCollectionExt.cs" />
     <Compile Include="CommandAggregator.cs" />
     <Compile Include="CommandAggregatorFactory.cs" />
     <Compile Include="BaseVm.cs" />
