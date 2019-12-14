@@ -8,7 +8,7 @@
     /// Summary description for ObservabelCollectionExtTests
     /// </summary>
     [TestClass]
-    public class ObservabelCollectionExtTests
+    public class ObservableCollectionExtTests
     {        
         private class TestClass
         {

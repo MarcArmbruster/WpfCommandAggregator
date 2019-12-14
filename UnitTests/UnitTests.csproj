@@ -60,7 +60,7 @@
   <ItemGroup>
     <Compile Include="BaseVmTest.cs" />
     <Compile Include="CmdAggTests.cs" />
-    <Compile Include="Collections\ObservabelCollectionExtTests.cs" />
+    <Compile Include="Collections\ObservableCollectionExtTests.cs" />
     <Compile Include="DependsOnTests.cs" />
     <Compile Include="ExternalAggregatorTests.cs" />
     <Compile Include="HierarchyCommandTests.cs" />
