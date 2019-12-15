@@ -5,20 +5,59 @@
     using System.ComponentModel;
     using System.Linq;
 
+    /// <summary>
+    /// An extended ObservableCollection with additional features<br\>
+    /// - Fast AddRange method.<br\>
+    /// - Fast RemoveItem.<br\>
+    /// - Replace method.<br\>
+    /// </summary>   
+    /// <remarks>
+    ///   <para><b>History</b></para>
+    ///   <list type="table">
+    ///   <item>
+    ///   <term><b>Author:</b></term>
+    ///   <description>Marc Armbruster</description>
+    ///   </item>
+    ///   <item>
+    ///   <term><b>Date:</b></term>
+    ///   <description>Dec/15/2019</description>
+    ///   </item>
+    ///   <item>
+    ///   <term><b>Remarks:</b></term>
+    ///   <description>Initial version.</description>
+    ///   </item>
+    ///   </list>
+    /// </remarks>
     public class ObservableCollectionExt<T> : ObservableCollection<T>
     {
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public ObservableCollectionExt()
         {
         }
 
-        public ObservableCollectionExt(List<T> data) : base(data)
+        /// <summary>
+        /// Constructor with list of initial items.
+        /// </summary>
+        /// <param name="data">Initial items.</param>
+        public ObservableCollectionExt(List<T> items) : base(items)
         {
         }
 
-        public ObservableCollectionExt(IEnumerable<T> data) : base(data)
+        /// <summary>
+        /// Constructor with list of initial items.
+        /// </summary>
+        /// <param name="data">Initial items.</param>
+        public ObservableCollectionExt(IEnumerable<T> items) : base(items)
         {           
         }
 
+        /// <summary>
+        /// Replaces a given item with a new one (first occurance).
+        /// </summary>
+        /// <param name="oldItem">The item to replace.</param>
+        /// <param name="newItem">The new item.</param>
         public void Replace(T oldItem, T newItem)
         {
             this.CheckReentrancy();
@@ -56,7 +95,7 @@
             }
 
             // Raise relevant notifications after all items are added
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new List<T>(itemsToAdd), countBeforeAdding));
+            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(this.Count)));
             this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(this.Items)));
         }
@@ -83,7 +122,7 @@
             }
 
             // Raise relevant notifications after all items are removed
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new List<T>(), itemsToRemove));
+            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(this.Count)));
             this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(this.Items)));
         }        

@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Person.cs" />
     <Compile Include="PerformanceChecker.cs" />
     <Compile Include="ViewModels\MainVm.cs" />
     <Page Include="Views\MainWindow.xaml">

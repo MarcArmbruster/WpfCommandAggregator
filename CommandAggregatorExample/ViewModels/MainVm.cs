@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using CommandAggregatorExample.Models;
 using WPFCommandAggregator;
 
 namespace CommandAggregatorExample.ViewModels
@@ -28,6 +31,12 @@ namespace CommandAggregatorExample.ViewModels
     /// </remarks>
     public class MainVm : BaseVm
     {
+        private List<Person> allPersons = new List<Person>
+        {
+            new Person { Name = "Marc", Age = 99 },
+            new Person { Name = "Anke", Age = 19 }
+        };
+
         /// <summary>
         /// The save all checker.
         /// </summary>
@@ -52,7 +61,17 @@ namespace CommandAggregatorExample.ViewModels
         /// Initializes a new instance of the <see cref="MainVm"/> class.
         /// </summary>
         public MainVm()
-        {           
+        {
+            this.Persons = new ObservableCollectionExt<Person>();
+        }
+
+        /// <summary>
+        /// THe extended obersvable collection.
+        /// </summary>
+        public ObservableCollectionExt<Person> Persons
+        {
+            get { return this.GetPropertyValue<ObservableCollectionExt<Person>>(); }
+            private set { this.SetPropertyValue<ObservableCollectionExt<Person>>(value); }
         }
 
         private bool exampleProperty;
@@ -117,7 +136,7 @@ namespace CommandAggregatorExample.ViewModels
         public decimal? Result
         {
             get => this.firstInput + this.secondInput;
-        }
+        }        
 
         /// <summary>
         /// Initializes the commands.
@@ -130,6 +149,9 @@ namespace CommandAggregatorExample.ViewModels
             this.CmdAgg.AddOrSetCommand("Options", new RelayCommand(p1 => MessageBox.Show("Options called"), p2 => true));
             this.CmdAgg.AddOrSetCommand("About", new RelayCommand(p1 => MessageBox.Show("About" + (p1 == null ? string.Empty : " [" + p1 + "]") + " called"), p2 => true));
             this.CmdAgg.AddOrSetCommand("AboutAsnyc", new RelayCommand(p1 => OpenAboutAsync(p1), p2 => true));
+            this.CmdAgg.AddOrSetCommand("AddPersons", p1 => this.AddPersons(), p2 => true);
+            this.CmdAgg.AddOrSetCommand("RemovePersons", p1 => this.RemovePersons(), p2 => this.Persons.Any());
+            this.CmdAgg.AddOrSetCommand("ReplacePerson", p1 => this.ReplacePerson(), p2 => this.Persons.Any());
 
             // Adding a hierarchy command
             ICommand save1Cmd = new RelayCommand(new Action<object>(p1 => MessageBox.Show("Save 1 called")), new Predicate<object>(p2 => this.CanSave1));
@@ -155,5 +177,20 @@ namespace CommandAggregatorExample.ViewModels
         {            
             this.CmdAgg.ExecuteAsync("About", cmdParameter);
         }        
+
+        private void AddPersons()
+        {
+            this.Persons.AddRange(this.allPersons);
+        }
+
+        private void RemovePersons()
+        {
+            this.Persons.RemoveItems(this.allPersons);
+        }
+
+        private void ReplacePerson()
+        {
+            this.Persons.Replace(allPersons.First(), new Person { Name = "Gerhard", Age = 27 });
+        }
     }
 }
