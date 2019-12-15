@@ -24,7 +24,7 @@
     ///   </item>
     ///   <item>
     ///   <term><b>Remarks:</b></term>
-    ///   <description>Initial version.</description>
+    ///   <description>Provided by WPF Command Aggregator.</description>
     ///   </item>
     ///   </list>
     /// </remarks>

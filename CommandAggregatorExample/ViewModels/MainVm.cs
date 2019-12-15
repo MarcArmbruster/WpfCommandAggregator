@@ -176,18 +176,27 @@ namespace CommandAggregatorExample.ViewModels
         private void OpenAboutAsync(object cmdParameter)
         {            
             this.CmdAgg.ExecuteAsync("About", cmdParameter);
-        }        
+        }
 
+        /// <summary>
+        /// Adds test persons to the Persons collection.
+        /// </summary>
         private void AddPersons()
         {
             this.Persons.AddRange(this.allPersons);
         }
 
+        /// <summary>
+        /// Remove test persons from the Persons collection.
+        /// </summary>
         private void RemovePersons()
         {
             this.Persons.RemoveItems(this.allPersons);
         }
 
+        /// <summary>
+        /// Replace a person by another person within the Persons collection.
+        /// </summary>
         private void ReplacePerson()
         {
             this.Persons.Replace(allPersons.First(), new Person { Name = "Gerhard", Age = 27 });
