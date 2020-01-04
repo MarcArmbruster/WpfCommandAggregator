@@ -5,7 +5,7 @@
     using System.Collections.ObjectModel;
 
     /// <summary>
-    /// Summary description for ObservabelCollectionExtTests
+    /// Tests for ObservabelCollectionExt class.
     /// </summary>
     [TestClass]
     public class ObservableCollectionExtTests

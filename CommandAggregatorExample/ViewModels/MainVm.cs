@@ -94,7 +94,6 @@ namespace CommandAggregatorExample.ViewModels
         public bool CanSave1
         {
             // using NO private field -> using automatic values storage (base class).
-
             get => this.GetPropertyValue<bool>();
             set => this.SetPropertyValue<bool>(value);                          
         }
@@ -136,7 +135,13 @@ namespace CommandAggregatorExample.ViewModels
         public decimal? Result
         {
             get => this.firstInput + this.secondInput;
-        }        
+        }
+
+        public bool FirstValueHasFocus 
+        {
+            get => this.GetPropertyValue<bool>();
+            set => this.SetPropertyValue<bool>(value);
+        }
 
         /// <summary>
         /// Initializes the commands.
@@ -144,11 +149,12 @@ namespace CommandAggregatorExample.ViewModels
         protected sealed override void InitCommands()
         {
             // AddOrSetCommand method is overridden --> provide ICommad or Action / Predicate delegates            
-            this.CmdAgg.AddOrSetCommand("Exit", new RelayCommand(p1 => MessageBox.Show("Exit called")));
+            this.CmdAgg.AddOrSetCommand("Exit", new RelayCommand(p1 => this.CloseWindow()));
             this.CmdAgg.AddOrSetCommand("Print", new RelayCommand(p1 => MessageBox.Show("Print called"), p2 => true, this.performanceChecker.Start, this.performanceChecker.Stop));
             this.CmdAgg.AddOrSetCommand("Options", new RelayCommand(p1 => MessageBox.Show("Options called"), p2 => true));
             this.CmdAgg.AddOrSetCommand("About", new RelayCommand(p1 => MessageBox.Show("About" + (p1 == null ? string.Empty : " [" + p1 + "]") + " called"), p2 => true));
             this.CmdAgg.AddOrSetCommand("AboutAsnyc", new RelayCommand(p1 => OpenAboutAsync(p1), p2 => true));
+            this.CmdAgg.AddOrSetCommand("MoveFocus", p1 => this.MoveFocus(), p2 => true);
             this.CmdAgg.AddOrSetCommand("AddPersons", p1 => this.AddPersons(), p2 => true);
             this.CmdAgg.AddOrSetCommand("RemovePersons", p1 => this.RemovePersons(), p2 => this.Persons.Any());
             this.CmdAgg.AddOrSetCommand("ReplacePerson", p1 => this.ReplacePerson(), p2 => this.Persons.Any());
@@ -168,6 +174,16 @@ namespace CommandAggregatorExample.ViewModels
             saveAllCmd.AddChildsCommand(new List<ICommand> { save1Cmd, save2Cmd });
             this.CmdAgg.AddOrSetCommand("SaveAll", saveAllCmd);            
         }      
+
+        /// <summary>
+        /// Closes the (main) window by using the WindowCloser.
+        /// </summary>
+        private void CloseWindow()
+        {
+            // setting the value to true (or false) will close the window using this instance as its DataContext
+            // and uses the attached property.
+            this.WindowResult = true;
+        }
 
         /// <summary>
         /// Opens the about message asynchronous.
@@ -200,6 +216,14 @@ namespace CommandAggregatorExample.ViewModels
         private void ReplacePerson()
         {
             this.Persons.Replace(allPersons.First(), new Person { Name = "Gerhard", Age = 27 });
+        }
+
+        /// <summary>
+        /// Toggle the focus on the input field 'First value'
+        /// </summary>
+        private void MoveFocus()
+        {
+            this.FirstValueHasFocus = !this.FirstValueHasFocus;
         }
     }
 }

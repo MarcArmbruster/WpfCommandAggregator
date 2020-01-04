@@ -2,6 +2,8 @@
     x:Class="CommandAggregatorExample.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ap="clr-namespace:WPFCommandAggregator.AttachedProperties;assembly=WPFCommandAggregator"
+    ap:WindowCloser.WindowResult="{Binding WindowResult, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
     Title="Command Aggregator Example"
     Width="600"
     Height="600"
@@ -34,6 +36,7 @@
                 <Button
                     Command="{Binding CmdAgg[Exit]}"
                     Content="Exit"
+                    ToolTip="Close window by using the attached 'WindowCloser' property"
                     Template="{StaticResource buttonTemplate}" />
                 <Button
                     Command="{Binding CmdAgg[SaveAll]}"
@@ -55,6 +58,11 @@
                     Command="{Binding CmdAgg[AboutAsnyc]}"
                     CommandParameter="async"
                     Content="AboutAsnyc"
+                    Template="{StaticResource buttonTemplate}" />
+                <Button
+                    Command="{Binding CmdAgg[MoveFocus]}"
+                    Content="Set/remove Focus"
+                    ToolTip="sets or removes the focus of the 'First value' input field (attached property example)"
                     Template="{StaticResource buttonTemplate}" />
             </WrapPanel>
         </Border>
@@ -99,7 +107,10 @@
                 Grid.Row="0"
                 Grid.Column="2"
                 Content="Sum" />
+
+            <!-- Set Focus initially to this control -->
             <TextBox
+                ap:Focused.Focused="{Binding Path=FirstValueHasFocus, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                 Grid.Row="1"
                 Grid.Column="0"
                 Text="{Binding Path=FirstInput, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, FallbackValue='0'}" />

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-
-namespace WPFCommandAggregator
+﻿namespace WPFCommandAggregator
 {
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+
     /// <summary>
     /// Base View Model
     /// </summary>   
@@ -47,6 +47,17 @@ namespace WPFCommandAggregator
         /// Default is false (active notifications).
         /// </summary>
         protected bool SuppressNotifications {get; set; }
+
+        /// <summary>
+        /// This property is used by the attached property 'WindowCloser'. 
+        /// If this attached property is attached to a window, this WindowResult property can be used to close the window 
+        /// from this current view model by setting value to true or false. A null value will not close the window.
+        /// </summary>
+        public bool? WindowResult 
+        {
+            get => this.GetPropertyValue<bool?>();
+            set => this.SetPropertyValue<bool?>(value);
+        }
 
         #region Constructor
 

@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -58,6 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AttachedProperties\IsFocusedTests.cs" />
     <Compile Include="BaseVmTest.cs" />
     <Compile Include="CmdAggTests.cs" />
     <Compile Include="Collections\ObservableCollectionExtTests.cs" />
