@@ -59,7 +59,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AttachedProperties\IsFocusedTests.cs" />
+    <Compile Include="AttachedProperties\FocusedTests.cs" />
+    <Compile Include="AttachedProperties\WindowCloserTests.cs" />
     <Compile Include="BaseVmTest.cs" />
     <Compile Include="CmdAggTests.cs" />
     <Compile Include="Collections\ObservableCollectionExtTests.cs" />

@@ -54,7 +54,7 @@
             DependencyProperty.RegisterAttached(
                 "WindowResult", 
                 typeof(bool?),
-                typeof(WindowCloser), 
+                typeof(WindowCloser),
                 new PropertyMetadata(null, OnWindowResultChanged));
 
         /// <summary>

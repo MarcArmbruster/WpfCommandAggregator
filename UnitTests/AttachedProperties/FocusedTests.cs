@@ -1,6 +1,7 @@
 ﻿namespace UnitTests.AttachedProperties
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
     using System.Windows.Controls;
     using WPFCommandAggregator.AttachedProperties;
 
@@ -8,9 +9,10 @@
     /// Tests for ObservabelCollectionExt class.
     /// </summary>
     [TestClass]
-    public class IsFocusedTests
+    public class FocusedTests
     {
         [TestMethod]
+        [STAThread]
         public void SetFocusTest()
         {
             TextBox target = new TextBox();
@@ -20,6 +22,7 @@
         }
 
         [TestMethod]
+        [STAThread]
         public void RemoveFocusTest()
         {
             TextBox target = new TextBox();            

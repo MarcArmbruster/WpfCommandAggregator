@@ -52,7 +52,7 @@
             DependencyProperty.RegisterAttached(
                 "Focused", 
                 typeof(bool), 
-                typeof(Focused), 
+                typeof(Focused),
                 new PropertyMetadata(false, OnFocusedChanged));
 
         /// <summary>
