@@ -11,11 +11,11 @@ namespace CommandAggregatorExample
     ///   <list type="table">
     ///   <item>
     ///   <term><b>Author:</b></term>
-    ///   <description>See Josh Smith's implementation!</description>
+    ///   <description>Performance meassurement</description>
     ///   </item>
     ///   <item>
     ///   <term><b>Date:</b></term>
-    ///   <description>Dec/23/2014</description>
+    ///   <description>Sep/25/2022</description>
     ///   </item>
     ///   <item>
     ///   <term><b>Remarks:</b></term>
@@ -23,7 +23,7 @@ namespace CommandAggregatorExample
     ///   </item>
     ///   </list>
     /// </remarks>
-    internal class PerformanceChecker
+    public class PerformanceChecker
     {
         /// <summary>
         /// The description for the checker instance.

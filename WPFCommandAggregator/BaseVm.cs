@@ -33,13 +33,13 @@
         /// <summary>
         /// Global (static) storage for property dependencies.
         /// </summary>
-        private static ConcurrentDictionary<Type, Dictionary<string, List<string>>> propertyDependencies 
+        private static readonly ConcurrentDictionary<Type, Dictionary<string, List<string>>> propertyDependencies 
             = new ConcurrentDictionary<Type, Dictionary<string, List<string>>>();
 
         /// <summary>
         /// Dictionary to hold private values of bindable properties.
         /// </summary>
-        private Dictionary<string, object> values = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> values = new Dictionary<string, object>();
 
         /// <summary>
         /// Property to suppress notifications.
@@ -77,7 +77,7 @@
         /// <summary>
         /// The command aggregate.
         /// </summary>
-        private ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator();
+        private readonly ICommandAggregator cmdAgg = CommandAggregatorFactory.GetNewCommandAggregator();
 
         /// <summary>
         /// Gets the command aggregate.

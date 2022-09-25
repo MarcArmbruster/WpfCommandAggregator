@@ -5,9 +5,9 @@ In addition, a BaseViewModel class (BaseVm) with an integrated command aggregato
 Latest stable version is available as a nuGet package:<br/>
 [nuGet](https://www.nuget.org/packages/WPFCommandAggregator/)
 
-There are also a UWP and a WPF (net Core 3.1) version of the CommandAggregator:<br/>
+There are also a UWP and a WPF (.NET -> Core 3.1 or higher) version of the CommandAggregator:<br/>
 
-.NET (Core 3.0 or higher)<br/>
+.NET (Core 3.1 or higher)<br/>
 [gitHub: WPF Command Aggregator Core](https://github.com/MarcArmbruster/WpfCommandAggregator.Core)<br/>
 [nuGet: WPF Command Aggregator Core](https://www.nuget.org/packages/WpfCommandAggregator.Core/)
 
@@ -16,6 +16,10 @@ UWP:<br/>
 [nuGet: UWP Command Aggregator](https://www.nuget.org/packages/UwpCommandAggregator/)
 
 ## Versions
+- 1.6.1.0
+  - some internal code optimizations
+  - Minimum .net Framework Version upgraded from 4.5.2 to 4.6.2!
+    If you still need running the component on .net Framework 4.5.2 please still use the stable and proved version 1.6.0.0
 - 1.6.0.0
   - new: ObservableCollectionExt extends ObservableCollection with fast 
     AddRange, RemoveItems methods and also a Replace method

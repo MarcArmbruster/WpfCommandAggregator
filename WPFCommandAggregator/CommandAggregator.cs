@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
-
-namespace WPFCommandAggregator
+﻿namespace WPFCommandAggregator
 {
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+
     /// <summary>
     /// Command Aggregator class.
     /// Maintaining a bag of ICommand objects, identified by a string key including get and set methods, added by an indexer access (for easy binding usage).
@@ -144,10 +144,7 @@ namespace WPFCommandAggregator
         /// Counts the registered commands.
         /// </summary>
         /// <returns>Number of registered commands.</returns>
-        public int Count()
-        {
-            return this.commands.Count;
-        }
+        public int Count() => this.commands.Count;
 
         /// <summary>
         /// Executes the command asynchronous.
@@ -163,7 +160,7 @@ namespace WPFCommandAggregator
         {
             if (this.Exists(key) == false)
             {
-                return Task.Run(() => { });
+                return Task.CompletedTask;
             }
 
             return Task.Run(() => this.GetCommand(key).Execute(parameter));
@@ -219,8 +216,7 @@ namespace WPFCommandAggregator
         {
             if (this.Exists(key))
             {
-                ICommand oldCommand;
-                this.commands.TryRemove(key, out oldCommand);
+                this.commands.TryRemove(key, out _);
             }
         }
 

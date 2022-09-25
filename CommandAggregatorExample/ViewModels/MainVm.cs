@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
-using System.Windows.Input;
-using CommandAggregatorExample.Models;
-using WPFCommandAggregator;
-
-namespace CommandAggregatorExample.ViewModels
+﻿namespace CommandAggregatorExample.ViewModels
 {
+    using CommandAggregatorExample.Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Input;
+    using WPFCommandAggregator;
+
     /// <summary>
     /// View Model of MainWindow.
     /// </summary>   
@@ -31,7 +31,7 @@ namespace CommandAggregatorExample.ViewModels
     /// </remarks>
     public class MainVm : BaseVm
     {
-        private List<Person> allPersons = new List<Person>
+        private readonly List<Person> allPersons = new List<Person>
         {
             new Person { Name = "Marc", Age = 99 },
             new Person { Name = "Anke", Age = 19 }
@@ -40,7 +40,7 @@ namespace CommandAggregatorExample.ViewModels
         /// <summary>
         /// The save all checker.
         /// </summary>
-        private PerformanceChecker performanceChecker = new PerformanceChecker("PrintOut");
+        private readonly PerformanceChecker performanceChecker = new PerformanceChecker("PrintOut");
       
         /// <summary>
         /// The can save2 value.
