@@ -7,7 +7,7 @@ Latest stable version is available as a nuGet package:<br/>
 
 There are also a UWP and a WPF (net Core 3.1) version of the CommandAggregator:<br/>
 
-net Core 3.0<br/>
+.NET (Core 3.0 or higher)<br/>
 [gitHub: WPF Command Aggregator Core](https://github.com/MarcArmbruster/WpfCommandAggregator.Core)<br/>
 [nuGet: WPF Command Aggregator Core](https://www.nuget.org/packages/WpfCommandAggregator.Core/)
 
