@@ -5,7 +5,7 @@ In addition, a BaseViewModel class (BaseVm) with an integrated command aggregato
 Latest stable version is available as a nuGet package:<br/>
 [nuGet](https://www.nuget.org/packages/WPFCommandAggregator/)
 
-There are also a UWP and a WPF (net Core 3.0) version of the CommandAggregator:<br/>
+There are also a UWP and a WPF (net Core 3.1) version of the CommandAggregator:<br/>
 
 net Core 3.0<br/>
 [gitHub: WPF Command Aggregator Core](https://github.com/MarcArmbruster/WpfCommandAggregator.Core)<br/>
