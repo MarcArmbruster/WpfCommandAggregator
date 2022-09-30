@@ -21,3 +21,8 @@
 /WPFCommandAggregator/bin/Release
 /_nugetPackage/V1.3.0.0
 /_nugetPackage/V1.4.0.0
+/WpfCommandAggregator.nuspec
+/_nugetPackage/TEST
+/WPFCommandAggregator/WPFCommandAggregator.nuspec
+/WPFCommandAggregator/WPFCommandAggregator.dll
+/WPFCommandAggregator/WPFCommandAggregator.1.6.1.nupkg

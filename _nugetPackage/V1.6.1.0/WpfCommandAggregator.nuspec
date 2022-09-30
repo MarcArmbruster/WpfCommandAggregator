@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    
+    <!-- The identifier that must be unique within the hosting gallery -->
+    <id>WPFCommandAggregator</id>
+    
+    <title>WPF Command Aggregator</title>
+
+    <!-- The package version number that is used when resolving dependencies -->
+    <version>1.6.1</version>
+    
+    <!-- Authors contain text that appears directly on the gallery -->
+    <authors>Marc Armbruster</authors>
+
+    <!-- 
+         Owners are typically nuget.org identities that allow gallery
+         users to easily find other packages by the same owners.  
+    -->
+    <owners>marcarmbruster</owners>   
+    
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MS-PL</license>
+    <!-- <icon>icon.png</icon> -->
+    <projectUrl>https://github.com/MarcArmbruster/WpfCommandAggregator</projectUrl>
+
+    <description>MVVM solution for efficent command definition and usage in WPF projects including a comfortable base view model and additional features.</description>
+    
+    <!-- Any details about this particular release -->
+    <releaseNotes>
+       -Upgrade .net Framework from 4.5.2 to >=4.6.2 (if 4.5.2 is still required, use version 1.6.0, please)
+       -inner code optimizations
+    </releaseNotes>
+
+    <copyright>Copyright ©2014-2022 Marc Armbruster</copyright>
+    
+    <!-- Tags appear in the gallery and can be used for tag searches -->
+    <tags>WPF MVVM Command Pattern ViewModel csharp</tags>
+  </metadata>
+</package>
