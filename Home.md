@@ -5,9 +5,9 @@ In addition, a BaseViewModel class (BaseVm) with an integrated command aggregato
 Latest stable version is available as a nuGet package:<br/>
 [nuGet](https://www.nuget.org/packages/WPFCommandAggregator/)
 
-There are also a UWP and a WPF (.NET -> Core 3.1 or higher) version of the CommandAggregator:<br/>
+There are also a UWP and a WPF.NET (.NET6 or higher) version of the CommandAggregator:<br/>
 
-.NET (Core 3.1 or higher)<br/>
+.NET (6 or higher)<br/>
 [gitHub: WPF Command Aggregator Core](https://github.com/MarcArmbruster/WpfCommandAggregator.Core)<br/>
 [nuGet: WPF Command Aggregator Core](https://www.nuget.org/packages/WpfCommandAggregator.Core/)
 
@@ -16,6 +16,10 @@ UWP:<br/>
 [nuGet: UWP Command Aggregator](https://www.nuget.org/packages/UwpCommandAggregator/)
 
 ## Versions
+- 2.0.0.0
+    - InitCommands method within BaseVm was set from abstract to virtual
+    - Target Framework set to .Net 4.8 (or higher). 
+    If .Net 4.6.2 or .Net 4.7 must be supported, you can still use version 1.6.1.0 
 - 1.6.1.0
   - some internal code optimizations
   - Minimum .net Framework Version upgraded from 4.5.2 to 4.6.2!
@@ -135,7 +139,9 @@ public abstract class BaseVm : INotifyPropertyChanged
         }
    }
 
-   protected abstract void InitCommands();
+   protected virtual void InitCommands() 
+   {
+   }
 
    protected BaseVm()
    {
@@ -199,6 +205,10 @@ Indexer binding works with square brackets and the name of the registered comman
 The WPF Command Aggregator is working well in my current and previous projects. I was able to reduce the lines of code for command definitions for more than 2000 (within my current project) without loosing any functionality! Each command definition/registration is reduced to exact one line of code.
 
 Thanks to Gerhard Ahrens for all the discussions and testing after work time!
+
+## Version 2.0.0.0: virtual InitCommands
+The method InitCommands of the base view model (BaseVm) was changed from abstratc definition to virtual implementation.
+Therefore you do not need to override the method if you don't need any commands in your view model.
 
 ## Version 1.1.0.0: hierarchy command
 

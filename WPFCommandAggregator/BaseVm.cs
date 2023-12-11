@@ -91,7 +91,10 @@
         /// Initializes the commands - has to be overridden in derived classes.
         /// This is the place to register your view model specific commands.
         /// </summary>
-        protected abstract void InitCommands();
+        protected virtual void InitCommands()
+        {
+            // this method should be used to register commands
+        }
 
         #endregion WPF Command Aggregator
 
