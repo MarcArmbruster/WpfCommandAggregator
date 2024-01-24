@@ -1,4 +1,10 @@
 # WPF Command Aggregator
+
+[![Nuget](https://img.shields.io/nuget/v/WpfCommandAggregator?style=flat-square)](https://www.nuget.org/packages/WPFCommandAggregator)
+[![License](https://img.shields.io/github/license/MarcArmbruster/WpfCommandAggregator?style=flat-square)](https://github.com/MarcArmbruster/WPFCommandAggregator/blob/master/LICENSE)
+[![Downloads](https://img.shields.io/nuget/dt/WpfCommandAggregator?style=flat-square)](https://www.nuget.org/packages/WPFCommandAggregator)
+[![GitHub](https://img.shields.io/badge/-source-181717.svg?logo=GitHub)](https://github.com/MarcArmbruster/WPFCommandAggregator)
+
 The WPF Command Aggregator is a solution to reduce WPF command definitions to an absolute minimum of code lines (only one per command).
 In addition, a BaseViewModel class (BaseVm) with an integrated command aggregator instance and the DependsOn attribute is supported.
 
